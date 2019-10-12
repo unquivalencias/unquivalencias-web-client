@@ -7,6 +7,8 @@ import StudentSubjectHistory from '../../components/RequestDetail/StudentSubject
 import Button from '@material-ui/core/Button';
 import { Grid } from '@material-ui/core';
 
+import SimpleBreadcrumbs from '../../components/breadcrumbs'
+
 const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1
@@ -24,9 +26,11 @@ marginLeft: "4rem",
 
 export default function index() {
     const classes = useStyles();
-
+    const steps = [{name:"Solicitudes Pendientes"},{name:"Detalle Solicitud"}]
+    const currentstep = "Equivalencia Materia"
     return (
         <div className={classes.root}>
+            <SimpleBreadcrumbs steps={steps} currentstep={currentstep}/>
             <Grid container>
                 <Grid item xs={6}>
                     <h1>Analisis Matematico</h1>
