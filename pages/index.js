@@ -1,5 +1,5 @@
 import React from 'react'
 
 export default function index(){
-  return(<h1>Loginx </h1>)
+  return(<h1>Home</h1>)
 }
