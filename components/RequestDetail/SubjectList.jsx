@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import ApproveEquivalenceButton from '../MateriasList'
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import CrossMarkIcon from '@material-ui/icons/Cancel'
+import Link from 'next/link'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -89,9 +90,9 @@ export default function SimpleTable() {
                                     nRows[index] = { ...pRows[index], status: subjectState.given }
                                     return nRows;
                                 })} />
-                                <Button color='primary' variant='outlined' disabled={row.status == subjectState.previouslyGiven}>
+                                <Link href="/equivalence/known"><Button color='primary' variant='outlined' disabled={row.status == subjectState.previouslyGiven}>
                                     DETALLE
-                                    </Button>
+                                    </Button></Link>
                             </TableCell>
                         </TableRow>
                     ))}
