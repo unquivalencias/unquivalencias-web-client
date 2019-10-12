@@ -28,7 +28,7 @@ const rows = [
     createData('100/02', 'Tobias Calvente', 'UBA', 'Ingenieria en sistemas', 'UNQ', 'Lic. en Informatica'),
     createData('100/03', 'Rocio Otel', 'UNLAM', 'Ingenieria en sistemas', 'UNQ', 'Lic. en Informatica'),
     createData('100/04', 'James Black', 'UCA', 'Ingenieria en sistemas', 'UNQ', 'Lic. en Informatica'),
-    createData('100/05', 'Uriel Espinoza', 'UTN', 'Ingenieria en sistemas', 'UNQ', 'Lic. en Informatica'),
+    createData('100/07', 'Uriel Espinoza', 'UTN', 'Ingenieria en sistemas', 'UNQ', 'Lic. en Informatica'),
     createData('100/05', 'Erica Gerez', 'UADE', 'Ingenieria en sistemas', 'UNQ', 'Lic. en Informatica'),
 ];
 
@@ -50,7 +50,7 @@ export default function SimpleTable() {
                 </TableHead>
                 <TableBody>
                     {rows.map(row => (
-                        <Link href="/">
+                        <Link href="/requests/1">
                             <TableRow key={row.fileNumber}>
                                 <TableCell>
                                     {row.fileNumber}
