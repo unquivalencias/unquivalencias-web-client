@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -11,6 +11,11 @@ import ApproveEquivalenceButton from '../MateriasList'
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import CrossMarkIcon from '@material-ui/icons/Cancel'
 import Link from 'next/link'
+import { TextField, DialogActions } from '@material-ui/core';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -29,6 +34,9 @@ const useStyles = makeStyles(theme => ({
     },
     failmark: {
         color: 'red'
+    },
+    actionButton: {
+        margin: "1rem"
     }
 
 }));
@@ -60,6 +68,7 @@ export default function SimpleTable() {
 
     const classes = useStyles();
 
+
     return (
         <Paper className={classes.root}>
             <Table className={classes.table}>
@@ -81,7 +90,8 @@ export default function SimpleTable() {
                                     <CrossMarkIcon className={classes.failmark} />
                                 }{row.status === subjectState.previouslyGiven &&
                                     <CheckCircleIcon className={classes.previouslyGiven} />}
-
+                                {row.status === subjectState.rejected &&
+                                    <CrossMarkIcon className={classes.failmark} />}
                                 {row.status === subjectState.given &&
                                     <CheckCircleIcon className={classes.checkmark} />}
                             </TableCell>
@@ -91,8 +101,14 @@ export default function SimpleTable() {
                                     nRows[index] = { ...pRows[index], status: subjectState.given }
                                     return nRows;
                                 })} />
+                                <RejectButton disabled={row.status == subjectState.rejected} onReject={() => setRows(pRows => {
+                                    const nRows = [...pRows];
+                                    nRows[index] = { ...pRows[index], status: subjectState.rejected }
+                                    return nRows;
+                                })} />
                                 <Link href="/equivalence/known">
                                     <Button
+                                        className={classes.actionButton}
                                         color='primary'
                                         variant='outlined'
                                     >
@@ -105,4 +121,41 @@ export default function SimpleTable() {
             </Table>
         </Paper>
     );
+}
+
+function RejectButton({ onReject, disabled }) {
+
+    const [open, setOpen] = useState(false);
+    const classes = useStyles();
+
+    const rejectRequest = useCallback(() => {
+        onReject()
+        setOpen(false)
+    }, [onReject])
+
+    const close = useCallback(() => {
+        setOpen(false)
+    })
+
+    const handleClickOpen = useCallback(() => {
+        setOpen(true)
+    })
+
+    return (
+        <>
+            <Button className={classes.actionButton} variant="outlined" color="primary" onClick={handleClickOpen} disabled={disabled}>
+                RECHAZAR
+      </Button>
+            <Dialog open={open} onClose={close} aria-labelledby="form-dialog-title">
+                <DialogTitle id="form-dialog-title">Observaciones</DialogTitle>
+                <DialogContent>
+                    <TextField />
+                </DialogContent>
+                <DialogActions>
+                    <Button variant="contained" color="primary" onClick={rejectRequest}>Rechazar</Button>
+                    <Button variant="outlined" color="primary" onClick={close}>Cancelar</Button>
+                </DialogActions>
+            </Dialog>
+        </>
+    )
 }
