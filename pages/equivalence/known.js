@@ -3,6 +3,7 @@ import HistoryAproved from '../../components/RequestDetail/HistoryApproved'
 import Link from 'next/link'
 import { makeStyles } from '@material-ui/core/styles';
 import StudentSubjectHistory from '../../components/RequestDetail/StudentSubjectHistory'
+import Navbar from '../../components/Navbar'
 
 import Button from '@material-ui/core/Button';
 import { Grid } from '@material-ui/core';
@@ -26,7 +27,9 @@ export default function index() {
     const classes = useStyles();
 
     return (
+        
         <div className={classes.root}>
+            <Navbar/>
             <Grid container>
                 <Grid item xs={6}>
                     <h1>Analisis Matematico</h1>
