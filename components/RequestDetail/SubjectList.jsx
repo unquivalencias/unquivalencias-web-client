@@ -49,23 +49,8 @@ const subjectState = {
     rejected: 'Rechazada'
 }
 
-function createData(subject, status) {
-    return { subject, status };
-}
 
-export default function SimpleTable() {
-    const [rows, setRows] = useState([
-        createData('Introducción a la programación', subjectState.given),
-        createData('Sistemas operativos', subjectState.given),
-        createData('Estructuras de datos', subjectState.previouslyGiven),
-        createData('Programación con objetos', subjectState.previouslyGiven),
-        createData('Bases de datos', subjectState.neverGiven),
-        createData('Estrategias de persistencia', subjectState.previouslyGiven),
-        createData('Construcción de interfaces', subjectState.previouslyGiven),
-        createData('Lenguajes formales y automatas', subjectState.previouslyGiven),
-        createData('Logica y programación', subjectState.neverGiven),
-        createData('Programación funcional', subjectState.neverGiven),
-    ]);
+export default function SimpleTable({ subjects, setSubjects }) {
 
     const classes = useStyles();
 
@@ -81,7 +66,7 @@ export default function SimpleTable() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map((row, index) => (
+                    {subjects.map((row, index) => (
                         <TableRow hover key={row.subject}>
                             <TableCell>
                                 {row.subject}
@@ -97,12 +82,12 @@ export default function SimpleTable() {
                                     <CheckCircleIcon className={classes.checkmark} />}
                             </TableCell>
                             <TableCell align='right'>
-                                <ApproveEquivalenceButton disable={row.status == subjectState.given} onApprove={() => setRows(pRows => {
+                                <ApproveEquivalenceButton disable={row.status == subjectState.given} onApprove={() => setSubjects(pRows => {
                                     const nRows = [...pRows];
                                     nRows[index] = { ...pRows[index], status: subjectState.given }
                                     return nRows;
                                 })} />
-                                <RejectButton disabled={row.status == subjectState.rejected} onReject={() => setRows(pRows => {
+                                <RejectButton disabled={row.status == subjectState.rejected} onReject={() => setSubjects(pRows => {
                                     const nRows = [...pRows];
                                     nRows[index] = { ...pRows[index], status: subjectState.rejected }
                                     return nRows;
