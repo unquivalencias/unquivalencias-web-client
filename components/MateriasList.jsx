@@ -19,16 +19,21 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function CheckboxesGroup() {
+export default function CheckboxesGroup({disable, onApprove}) {
     const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = useCallback(() => {
     setOpen(true);
-  });
+  },[setOpen]);
 
   const handleClose = useCallback(() => {
     setOpen(false);
-  });
+  },[setOpen]);
+
+  const approve = useCallback(() => {
+    onApprove();
+    handleClose();
+  }, [onApprove, handleClose])
 
   const classes = useStyles();
 
@@ -36,15 +41,15 @@ export default function CheckboxesGroup() {
 
   return (
       <>
-    <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-    Open form dialog
+    <Button variant="outlined" color="primary" onClick={handleClickOpen} disabled={disable}>
+    APROBAR
   </Button>
     <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
     <DialogTitle id="form-dialog-title">Lenguajes Formales y Automatas</DialogTitle>
     <DialogContent>
     <div className={classes.root}>
       <FormControl component="fieldset" className={classes.formControl}>
-        <FormLabel component="legend">Assign equivalent assignaments</FormLabel>
+        <FormLabel component="legend">Asigna las materias equivalentes</FormLabel>
         <FormGroup>
           
         {assignaments.map(materia => {
@@ -62,9 +67,9 @@ export default function CheckboxesGroup() {
                 color="primary"
                 className={classes.submit}
                 type="submit"
-                onClick={handleClose}>
+                onClick={approve}>
                 
-              Save
+              Otorgar equivalencia
               </Button>
       </FormControl>
 
