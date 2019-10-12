@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function CheckboxesGroup({disable}) {
+export default function CheckboxesGroup({disable, onApprove}) {
     const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = useCallback(() => {
@@ -29,6 +29,11 @@ export default function CheckboxesGroup({disable}) {
   const handleClose = useCallback(() => {
     setOpen(false);
   },[setOpen]);
+
+  const approve = useCallback(() => {
+    onApprove();
+    handleClose();
+  }, [onApprove, handleClose])
 
   const classes = useStyles();
 
@@ -62,7 +67,7 @@ export default function CheckboxesGroup({disable}) {
                 color="primary"
                 className={classes.submit}
                 type="submit"
-                onClick={handleClose}>
+                onClick={approve}>
                 
               Otorgar equivalencia
               </Button>

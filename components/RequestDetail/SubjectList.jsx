@@ -23,30 +23,39 @@ const useStyles = makeStyles(theme => ({
     checkmark: {
         color: 'green'
     },
+    previouslyGiven: {
+        color: 'blue'
+    },
     failmark: {
         color: 'red'
     }
 
 }));
 
+const subjectState = {
+    neverGiven: 'Nunca otorgada',
+    previouslyGiven: 'Previamente Aprobada',
+    given: 'Otorgada',
+}
+
 function createData(subject, status) {
     return { subject, status };
 }
 
-const rows = [
-    createData('Introducción a la programación', 'Nunca otorgada'),
-    createData('Sistemas operativos', 'Nunca otorgada'),
-    createData('Estructuras de datos', 'Previamente aprobada'),
-    createData('Programación con objetos', 'Previamente aprobada'),
-    createData('Bases de datos', 'Nunca otorgada'),
-    createData('Estrategias de persistencia', 'Previamente aprobada'),
-    createData('Construcción de interfaces', 'Previamente aprobada'),
-    createData('Lenguajes formales y automatas', 'Previamente aprobada'),
-    createData('Logica y programación', 'Nunca otorgada'),
-    createData('Programación funcional', 'Nunca otorgada'),
-];
-
 export default function SimpleTable() {
+    const [rows, setRows] = useState([
+        createData('Introducción a la programación', subjectState.neverGiven),
+        createData('Sistemas operativos', subjectState.neverGiven),
+        createData('Estructuras de datos', subjectState.previouslyGiven),
+        createData('Programación con objetos', subjectState.previouslyGiven),
+        createData('Bases de datos', subjectState.neverGiven),
+        createData('Estrategias de persistencia', subjectState.previouslyGiven),
+        createData('Construcción de interfaces', subjectState.previouslyGiven),
+        createData('Lenguajes formales y automatas', subjectState.previouslyGiven),
+        createData('Logica y programación', subjectState.neverGiven),
+        createData('Programación funcional', subjectState.neverGiven),
+    ]);
+
     const classes = useStyles();
 
     return (
@@ -55,22 +64,32 @@ export default function SimpleTable() {
                 <TableHead>
                     <TableRow>
                         <TableCell>Materia</TableCell>
-                        <TableCell align="right">Estado de solicitudes</TableCell>
-                        <TableCell align="right">Accion</TableCell>
+                        <TableCell align='right'>Estado de solicitudes</TableCell>
+                        <TableCell align='right'>Accion</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map(row => (
+                    {rows.map((row, index) => (
                         <TableRow key={row.subject}>
                             <TableCell>
                                 {row.subject}
                             </TableCell>
-                            <TableCell align="right">{row.status}{row.status == "Previamente aprobada" ?
-                                <CheckCircleIcon className={classes.checkmark} /> :
-                                <CrossMarkIcon className={classes.failmark} />}</TableCell>
-                            <TableCell align="right">
-                                <ApproveEquivalenceButton disable={row.status == "Nunca otorgada"} />
-                                <Button color="primary" variant="outlined" disabled={row.status == "Previamente aprobada"}>
+                            <TableCell align='right'>{row.status}
+                                {row.status === subjectState.neverGiven &&
+                                    <CrossMarkIcon className={classes.failmark} />
+                                }{row.status === subjectState.previouslyGiven &&
+                                    <CheckCircleIcon className={classes.previouslyGiven} />}
+                            
+                            {row.status === subjectState.given &&
+                                    <CheckCircleIcon className={classes.checkmark} />}
+                            </TableCell>
+                            <TableCell align='right'>
+                                <ApproveEquivalenceButton disable={row.status == subjectState.given} onApprove={() => setRows(pRows => {
+                                    const nRows = [...pRows];
+                                    nRows[index] = { ...pRows[index], status: subjectState.given }
+                                    return nRows;
+                                })} />
+                                <Button color='primary' variant='outlined' disabled={row.status == subjectState.previouslyGiven}>
                                     DETALLE
                                     </Button>
                             </TableCell>
