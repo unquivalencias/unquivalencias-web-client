@@ -81,7 +81,7 @@ export default function SimpleTable() {
                 </TableHead>
                 <TableBody>
                     {rows.map((row, index) => (
-                        <TableRow key={row.subject}>
+                        <TableRow hover key={row.subject}>
                             <TableCell>
                                 {row.subject}
                             </TableCell>

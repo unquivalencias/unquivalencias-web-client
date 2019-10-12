@@ -51,7 +51,7 @@ export default function SimpleTable() {
                 <TableBody>
                     {rows.map(row => (
                         <Link href="/requests/1">
-                            <TableRow key={row.fileNumber}>
+                            <TableRow hover key={row.fileNumber}>
                                 <TableCell>
                                     {row.fileNumber}
                                 </TableCell>
