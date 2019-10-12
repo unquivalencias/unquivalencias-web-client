@@ -3,9 +3,10 @@ import HistoryAproved from '../../components/RequestDetail/HistoryApproved'
 import Link from 'next/link'
 import { makeStyles } from '@material-ui/core/styles';
 import StudentSubjectHistory from '../../components/RequestDetail/StudentSubjectHistory'
+import Navbar from '../../components/Navbar'
 
 import Button from '@material-ui/core/Button';
-import { Grid } from '@material-ui/core';
+import { Grid, Container } from '@material-ui/core';
 
 import SimpleBreadcrumbs from '../../components/breadcrumbs'
 
@@ -29,12 +30,16 @@ export default function index() {
     const steps = [{ name: "Solicitudes Pendientes" }, { name: "Detalle Solicitud" }]
     const currentstep = "Equivalencia Materia"
     return (
+        
         <div className={classes.root}>
-            <SimpleBreadcrumbs steps={steps} currentstep={currentstep} />
+            <Navbar/>
+            <Container fixed>
+            <SimpleBreadcrumbs steps={steps} currentstep={currentstep}/>
             <Grid container>
                 <Grid item xs={6}>
                     <div className={classes.rightPanel}>
                         <h1>Analisis Matematico</h1>
+                        <h2>Equivalencias Otorgadas</h2>
                         <HistoryAproved />
                         <div className={classes.actions}>
                             <Link href="/requests/1"><Button className={classes.button} variant="contained" color="primary" type="submit">Aceptar</Button></Link>
@@ -50,7 +55,8 @@ export default function index() {
                     </div>
                 </Grid>
             </Grid>
-        </div>
+            </Container>
+            </div>
     )
 }
 

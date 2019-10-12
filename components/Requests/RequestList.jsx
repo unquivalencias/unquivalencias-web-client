@@ -7,6 +7,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Link from 'next/link'
+import TablePagination from '@material-ui/core/TablePagination';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -51,7 +52,7 @@ export default function SimpleTable() {
                 <TableBody>
                     {rows.map(row => (
                         <Link href="/requests/1">
-                            <TableRow key={row.fileNumber}>
+                            <TableRow hover key={row.fileNumber}>
                                 <TableCell>
                                     {row.fileNumber}
                                 </TableCell>
@@ -65,6 +66,13 @@ export default function SimpleTable() {
                     ))}
                 </TableBody>
             </Table>
+            <TablePagination
+                rowsPerPageOptions={[5, 10, 25]}
+                component="div"
+                count={17}
+                rowsPerPage={10}
+                page={0}
+            />
         </Paper>
     );
 }
