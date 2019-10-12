@@ -21,7 +21,7 @@ export default function SignIn() {
     <Formik
       initialValues={{ email: 'camila@gmail.com', password: 'root' }}
       onSubmit={() => {
-        router.push('/')
+        router.push('/requests')
       }}
     >
         <Container component="main" maxWidth="xs">
