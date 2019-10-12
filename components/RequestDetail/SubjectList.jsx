@@ -15,6 +15,7 @@ import { TextField, DialogActions } from '@material-ui/core';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import TablePagination from '@material-ui/core/TablePagination';
 
 
 const useStyles = makeStyles(theme => ({
@@ -119,6 +120,13 @@ export default function SimpleTable() {
                     ))}
                 </TableBody>
             </Table>
+            <TablePagination
+                rowsPerPageOptions={[5, 10, 25]}
+                component="div"
+                count={17}
+                rowsPerPage={10}
+                page={0}
+            />
         </Paper>
     );
 }
