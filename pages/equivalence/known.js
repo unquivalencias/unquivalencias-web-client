@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
         flexGrow: 1
     },
     rightPanel: {
-marginLeft: "4rem",
+        marginLeft: "4rem",
     },
     actions: {
         marginTop: 20
@@ -27,7 +27,7 @@ marginLeft: "4rem",
 
 export default function index() {
     const classes = useStyles();
-    const steps = [{name:"Solicitudes Pendientes"},{name:"Detalle Solicitud"}]
+    const steps = [{ name: "Solicitudes Pendientes" }, { name: "Detalle Solicitud" }]
     const currentstep = "Equivalencia Materia"
     return (
         
@@ -37,17 +37,22 @@ export default function index() {
             <SimpleBreadcrumbs steps={steps} currentstep={currentstep}/>
             <Grid container>
                 <Grid item xs={6}>
-                    <h1>Analisis Matematico</h1>
-                    <HistoryAproved />
-                    <div className={classes.actions}>
-                <Link href="/requests/1"><Button className={classes.button} variant="contained" color="primary" type="submit">Aceptar</Button></Link>
-                <Link href="/requests/1"><Button className={classes.button} variant="contained" color="secondary" type="submit">Rechazar</Button></Link>
-            </div>
+                    <div className={classes.rightPanel}>
+                        <h1>Analisis Matematico</h1>
+                        <h2>Equivalencias Otorgadas</h2>
+                        <HistoryAproved />
+                        <div className={classes.actions}>
+                            <Link href="/requests/1"><Button className={classes.button} variant="contained" color="primary" type="submit">Aceptar</Button></Link>
+                            <Link href="/requests/1"><Button className={classes.button} variant="contained" color="secondary" type="submit">Rechazar</Button></Link>
+                        </div>
+                    </div>
                 </Grid>
                 <Grid item xs={6} >
-                <div className={classes.rightPanel}>
-                    <StudentSubjectHistory />
-                </div>
+                    <div className={classes.rightPanel}>
+                        <h1>Materias aprobadas</h1>
+                        <h2>Universidad: UNLP</h2>
+                        <StudentSubjectHistory />
+                    </div>
                 </Grid>
             </Grid>
             </Container>
