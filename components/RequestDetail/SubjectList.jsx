@@ -35,8 +35,9 @@ const useStyles = makeStyles(theme => ({
 
 const subjectState = {
     neverGiven: 'Nunca otorgada',
-    previouslyGiven: 'Previamente Aprobada',
+    previouslyGiven: 'Previamente otorgada',
     given: 'Otorgada',
+    rejected: 'Rechazada'
 }
 
 function createData(subject, status) {
@@ -45,8 +46,8 @@ function createData(subject, status) {
 
 export default function SimpleTable() {
     const [rows, setRows] = useState([
-        createData('Introducción a la programación', subjectState.neverGiven),
-        createData('Sistemas operativos', subjectState.neverGiven),
+        createData('Introducción a la programación', subjectState.given),
+        createData('Sistemas operativos', subjectState.given),
         createData('Estructuras de datos', subjectState.previouslyGiven),
         createData('Programación con objetos', subjectState.previouslyGiven),
         createData('Bases de datos', subjectState.neverGiven),
@@ -80,8 +81,8 @@ export default function SimpleTable() {
                                     <CrossMarkIcon className={classes.failmark} />
                                 }{row.status === subjectState.previouslyGiven &&
                                     <CheckCircleIcon className={classes.previouslyGiven} />}
-                            
-                            {row.status === subjectState.given &&
+
+                                {row.status === subjectState.given &&
                                     <CheckCircleIcon className={classes.checkmark} />}
                             </TableCell>
                             <TableCell align='right'>
@@ -90,8 +91,12 @@ export default function SimpleTable() {
                                     nRows[index] = { ...pRows[index], status: subjectState.given }
                                     return nRows;
                                 })} />
-                                <Link href="/equivalence/known"><Button color='primary' variant='outlined' disabled={row.status == subjectState.previouslyGiven}>
-                                    DETALLE
+                                <Link href="/equivalence/known">
+                                    <Button
+                                        color='primary'
+                                        variant='outlined'
+                                    >
+                                        DETALLE
                                     </Button></Link>
                             </TableCell>
                         </TableRow>
