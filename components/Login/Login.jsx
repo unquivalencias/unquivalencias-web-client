@@ -19,7 +19,7 @@ export default function SignIn() {
 
   return (
     <Formik
-      initialValues={{ email: 'camila@gmail.com', password: 'root' }}
+      initialValues={{ email: 'director@universidad.edu.ar', password: 'password' }}
       onSubmit={() => {
         router.push('/requests')
       }}

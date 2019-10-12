@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react'
 import StudentData from '../../components/RequestDetail/StudentData'
 import SubjectList from '../../components/RequestDetail/SubjectList'
 import Navbar from '../../components/Navbar'
-import { Container, Typography, Paper, Grid } from '@material-ui/core'
+import { Container, Typography, Paper, Grid, makeStyles } from '@material-ui/core'
 
 import SimpleBreadcrumbs from '../../components/breadcrumbs'
 
@@ -55,15 +55,23 @@ export default function RequestDetail() {
                     setSubjects={setSubjects} />
             </Container></>)
 }
+const useStyles = makeStyles(theme => ({
+    root: {
+        padding: theme.spacing(2, 2),
+    },
+}));
+
 
 function SubjectsResume({ subjects }) {
+    const classes = useStyles();
+
     const given = useMemo(() => subjects.filter(({ status }) => status === subjectState.given).length);
     const rejected = useMemo(() => subjects.filter(({ status }) => status === subjectState.rejected).length);
     const neveerGiven = useMemo(() => subjects.filter(({ status }) => status === subjectState.neveerGiven).length);
     const previouslyGiven = useMemo(() => subjects.filter(({ status }) => status === subjectState.previouslyGiven).length);
 
 
-    return <Paper>
+    return <Paper className={classes.root}>
         <Typography align="right">Anteriormente Otorgadas: {previouslyGiven}</Typography>
         <Typography align="right">Nunca Otorgadas: {neveerGiven}</Typography>
         <Typography align="right">Otorgadas: {given}</Typography>
