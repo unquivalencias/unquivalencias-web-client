@@ -6,7 +6,7 @@ import StudentSubjectHistory from '../../components/RequestDetail/StudentSubject
 import Navbar from '../../components/Navbar'
 
 import Button from '@material-ui/core/Button';
-import { Grid } from '@material-ui/core';
+import { Grid, Container } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -30,6 +30,8 @@ export default function index() {
         
         <div className={classes.root}>
             <Navbar/>
+            <Container fixed>
+
             <Grid container>
                 <Grid item xs={6}>
                     <h1>Analisis Matematico</h1>
@@ -45,6 +47,7 @@ export default function index() {
                 </div>
                 </Grid>
             </Grid>
+            </Container>
             </div>
     )
 }
